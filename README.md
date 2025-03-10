@@ -9,8 +9,8 @@ Raspberry Pi Rhythm Tracker is a real-time beat detection and LED visualization 
 ### Option 1: Download and Flash a Prebuilt Image (Recommended)
 For a quick and hassle-free setup, use the prebuilt image:
 
-1. **Download** the latest `.img` file from the [Releases](https://github.com/evantobin1/raspberry-pi-rhythm-tracker/releases) section.
-2. **Flash the image** to an SD card using either:
+1. **Download** the latest `.zip` file from the [Releases](https://github.com/evantobin1/raspberry-pi-rhythm-tracker/releases) section.
+2. **Unzip the file, flash the `.img`** to an SD card using either:
    - **Raspberry Pi Imager** (Recommended)
    - The command line (Linux/macOS):
      ```sh
