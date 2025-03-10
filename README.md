@@ -33,6 +33,8 @@ For a quick and hassle-free setup, use the prebuilt image:
 ### Option 2: Build from Source (For Advanced Users)
 If you prefer to build a custom Raspberry Pi OS image with Rhythm Tracker pre-installed, follow these steps:
 
+> Note: The following build steps are intended to be run in a Linux environment. If you are using Windows Subsystem for Linux (WSL), ensure that you start in your WSL home directory (/home/your-username/) rather than a Windows-mounted directory (/mnt/c/...). This prevents permission issues and other compatibility problems during the build process.
+
 #### 1. Clone the Repositories
 ```sh
 git clone https://github.com/evantobin1/raspberry-pi-rhythm-tracker.git
