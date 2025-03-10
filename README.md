@@ -24,8 +24,10 @@ cd pi-gen
 ### 2. Copy the Installation Script
 From the `raspberry-pi-rhythm-tracker` repository, copy the `00-run.sh` script into `pi-gen`:
 ```sh
+mkdir -p stage2/04-rhythm-tracker/
 cp ../raspberry-pi-rhythm-tracker/pi-gen/stage2/04-rhythm-tracker/00-run.sh stage2/04-rhythm-tracker/
 chmod +x stage2/04-rhythm-tracker/00-run.sh
+
 ```
 
 ### 3. Copy the Application Files
