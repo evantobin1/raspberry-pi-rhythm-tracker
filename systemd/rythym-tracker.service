@@ -5,8 +5,8 @@ After=multi-user.target
 [Service]
 Type=simple
 User=pi
-WorkingDirectory=/home/pi/beat-visualizer
-ExecStart=/home/pi/beat-visualizer/.venv/bin/python /home/pi/beat-visualizer/app.py
+WorkingDirectory=/home/pi/rythym-tracker
+ExecStart=/home/pi/rythym-tracker/.venv/bin/python /home/pi/rythym-tracker/app.py
 Restart=always
 
 [Install]

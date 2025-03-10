@@ -1,9 +1,9 @@
 #!/bin/bash
-echo "🔧 Installing Beat Visualizer into Raspberry Pi OS Image..."
+echo "Installing Rythym Tracker into Raspberry Pi OS Image..."
 
 # Create project directory
-mkdir -p /home/pi/beat-visualizer
-cd /home/pi/beat-visualizer
+mkdir -p /home/pi/rythym-tracker
+cd /home/pi/rythym-tracker
 
 # Install dependencies
 apt-get update && apt-get install -y \
@@ -17,10 +17,10 @@ source .venv/bin/activate
 pip install numpy pyaudio aubio flask
 
 # Copy application files (Ensure these exist in pi-gen)
-cp -r /boot/beat-visualizer/* /home/pi/beat-visualizer/
+cp -r /boot/rythym-tracker/* /home/pi/rythym-tracker/
 
 # Enable systemd service
-cp /boot/beat-visualizer/systemd/beat-visualizer.service /etc/systemd/system/
-systemctl enable beat-visualizer
+cp /boot/rythym-tracker/systemd/rythym-tracker.service /etc/systemd/system/
+systemctl enable rythym-tracker
 
-echo "✅ Beat Visualizer has been added to the OS image!"
+echo "Rythym Tracker has been added to the OS image!"
