@@ -39,7 +39,7 @@ cp -r ../raspberry-pi-rhythm-tracker/systemd stage2/04-rhythm-tracker/files/
 ### 4. Copy the Systemd Service File
 To ensure the application starts automatically on boot, copy the systemd service file:
 ```sh
-cp ../raspberry-pi-rhythm-tracker/systemd/rythym-tracker.service stage2/04-rhythm-tracker/files/
+cp ../raspberry-pi-rhythm-tracker/systemd/rhythm-tracker.service stage2/04-rhythm-tracker/files/
 ```
 
 ### 5. Build the Custom Raspberry Pi OS Image
@@ -65,5 +65,5 @@ sudo dd if=pi-gen/deploy/your_custom_image.img of=/dev/sdX bs=4M status=progress
 Once the Raspberry Pi boots with the custom OS:
 - The Rhythm Tracker should start automatically.
 - Access the web interface at: `http://raspberrypi.local:5000`
-- Verify the service is running: `systemctl status rythym-tracker`
-- Restart the service if needed: `sudo systemctl restart rythym-tracker`
+- Verify the service is running: `systemctl status rhythm-tracker`
+- Restart the service if needed: `sudo systemctl restart rhythm-tracker`
