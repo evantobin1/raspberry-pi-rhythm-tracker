@@ -1,4 +1,6 @@
+```sh
 #!/bin/bash
+
 echo "Installing Rythym Tracker into Raspberry Pi OS Image..."
 
 # Create project directory
@@ -13,11 +15,11 @@ apt-get update && apt-get install -y \
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install Python dependencies
-pip install numpy pyaudio aubio flask
-
 # Copy application files (Ensure these exist in pi-gen)
 cp -r /boot/rythym-tracker/* /home/pi/rythym-tracker/
+
+# Install Python dependencies
+pip install -r /home/pi/rythym-tracker/app/requirements.txt
 
 # Enable systemd service
 cp /boot/rythym-tracker/systemd/rythym-tracker.service /etc/systemd/system/

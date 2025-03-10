@@ -5,45 +5,44 @@ Raspberry Pi Rhythm Tracker is a real-time beat detection and LED visualization 
 ## Prerequisites
 - A system capable of running the `pi-gen` tool to build Raspberry Pi OS images
 - A Raspberry Pi with a 3.5mm audio input
+- Git installed to clone the necessary repositories
 
 ## Building a Custom Raspberry Pi OS Image with Rhythm Tracker Preinstalled
 
-### 1. Clone the Rhythm Tracker Repository
+### 1. Clone the Required Repositories
 First, clone the Rhythm Tracker repository, which contains the application files and installation scripts:
 ```sh
 git clone https://github.com/evantobin1/raspberry-pi-rhythm-tracker.git
 ```
 
-### 2. Clone the Raspberry Pi OS Builder
-The official Raspberry Pi OS build tool, `pi-gen`, allows customization of the OS before flashing.
+Next, clone the official Raspberry Pi OS build tool, `pi-gen`, which allows customization of the OS before flashing:
 ```sh
 git clone https://github.com/RPi-Distro/pi-gen
 cd pi-gen
 ```
 
-### 3. Copy the Installation Script
+### 2. Copy the Installation Script
 From the `raspberry-pi-rhythm-tracker` repository, copy the `00-run.sh` script into `pi-gen`:
 ```sh
-cp ../raspberry-pi-rhythm-tracker/pi-gen/stage2/04-rythym-tracker/00-run.sh stage2/04-rythym-tracker/
-chmod +x stage2/04-rythym-tracker/00-run.sh
+cp ../raspberry-pi-rhythm-tracker/pi-gen/stage2/04-rhythm-tracker/00-run.sh stage2/04-rhythm-tracker/
+chmod +x stage2/04-rhythm-tracker/00-run.sh
 ```
 
-### 4. Copy the Application Files
-Copy the entire application directory from `raspberry-pi-rhythm-tracker` into the `pi-gen` build environment:
+### 3. Copy the Application Files
+Copy the entire `app/` directory, including `app.py` and `requirements.txt`, from `raspberry-pi-rhythm-tracker` into the `pi-gen` build environment:
 ```sh
-mkdir -p stage2/04-rythym-tracker/files/
-cp -r ../raspberry-pi-rhythm-tracker/app.py stage2/04-rythym-tracker/files/
-cp -r ../raspberry-pi-rhythm-tracker/templates stage2/04-rythym-tracker/files/
-cp -r ../raspberry-pi-rhythm-tracker/systemd stage2/04-rythym-tracker/files/
+cp -r ../raspberry-pi-rhythm-tracker/app stage2/04-rhythm-tracker/files/
+cp -r ../raspberry-pi-rhythm-tracker/templates stage2/04-rhythm-tracker/files/
+cp -r ../raspberry-pi-rhythm-tracker/systemd stage2/04-rhythm-tracker/files/
 ```
 
-### 5. Copy the Systemd Service File
+### 4. Copy the Systemd Service File
 To ensure the application starts automatically on boot, copy the systemd service file:
 ```sh
-cp ../raspberry-pi-rhythm-tracker/systemd/rythym-tracker.service stage2/04-rythym-tracker/files/
+cp ../raspberry-pi-rhythm-tracker/systemd/rythym-tracker.service stage2/04-rhythm-tracker/files/
 ```
 
-### 6. Build the Custom Raspberry Pi OS Image
+### 5. Build the Custom Raspberry Pi OS Image
 Inside the `pi-gen` directory, run the build process:
 ```sh
 ./build.sh
@@ -68,4 +67,3 @@ Once the Raspberry Pi boots with the custom OS:
 - Access the web interface at: `http://raspberrypi.local:5000`
 - Verify the service is running: `systemctl status rythym-tracker`
 - Restart the service if needed: `sudo systemctl restart rythym-tracker`
-
