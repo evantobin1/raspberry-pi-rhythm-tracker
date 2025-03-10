@@ -1,6 +1,4 @@
-```sh
 #!/bin/bash
-
 echo "Installing rhythm Tracker into Raspberry Pi OS Image..."
 
 # Create project directory

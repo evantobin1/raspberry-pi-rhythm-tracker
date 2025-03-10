@@ -63,17 +63,27 @@ class BeatDetector:
         print("Listening for beats...")
 
     def process_audio(self):
-        """Processes the audio input stream."""
+        """Processes the audio input stream and detects beats with confidence."""
         tempo = aubio.tempo("default", config["BUF_SIZE"] * 2, config["BUF_SIZE"], config["SAMPLERATE"])
+        
         while True:
             data = np.frombuffer(self.stream.read(config["BUF_SIZE"], exception_on_overflow=False), dtype=np.float32)
-            if tempo(data)[0]:
+            is_beat = tempo(data)[0]
+            
+            if is_beat:
+                confidence = tempo.get_confidence()  # Get confidence score (0-1 range)
                 self.bpm = tempo.get_bpm()
-                color = (255, 0, 0) if self.flip_state == 0 else (0, 0, 255)
                 self.flip_state = 1 - self.flip_state
                 beat_symbol = "▚" if self.flip_state == 0 else "▞"
-                print(f"{beat_symbol}\tBPM: {self.bpm:.1f}")
-                self.set_leds([color] * config["LED_COUNT"])
+
+                print(f"{beat_symbol}\tBPM: {self.bpm:.1f} | Confidence: {confidence:.2f}")
+                
+                # Adjust LED brightness based on confidence
+                brightness = int(255 * confidence)  # Scale brightness with confidence
+                color = (255, 0, 0) if self.flip_state == 0 else (0, 0, 255)
+                colr *= brightness
+                self.set_leds([color if self.flip_state == 0 else color] * config["LED_COUNT"])
+
 
     def set_leds(self, new_state):
         """Update LED state only if changed, avoiding unnecessary network traffic."""

@@ -5,9 +5,9 @@ Raspberry Pi Rhythm Tracker is a real-time beat detection and LED visualization 
 ## Prerequisites
 - A system capable of running the `pi-gen` tool to build Raspberry Pi OS images
 - A Raspberry Pi with a 3.5mm audio input
-- Git installed to clone the necessary repositories
 
 ## Building a Custom Raspberry Pi OS Image with Rhythm Tracker Preinstalled
+Note: The following build steps are intended to be run in a Linux environment. If you are using Windows Subsystem for Linux (WSL), ensure that you start in your WSL home directory (/home/your-username/) rather than a Windows-mounted directory (/mnt/c/...). This prevents permission issues and other compatibility problems during the build process.
 
 ### 1. Clone the Required Repositories
 First, clone the Rhythm Tracker repository, which contains the application files and installation scripts:
@@ -27,7 +27,6 @@ From the `raspberry-pi-rhythm-tracker` repository, copy the `00-run.sh` script i
 mkdir -p stage2/04-rhythm-tracker/
 cp ../raspberry-pi-rhythm-tracker/pi-gen/stage2/04-rhythm-tracker/00-run.sh stage2/04-rhythm-tracker/
 chmod +x stage2/04-rhythm-tracker/00-run.sh
-
 ```
 
 ### 3. Copy the Application Files
@@ -44,10 +43,17 @@ To ensure the application starts automatically on boot, copy the systemd service
 cp ../raspberry-pi-rhythm-tracker/systemd/rhythm-tracker.service stage2/04-rhythm-tracker/files/
 ```
 
-### 5. Build the Custom Raspberry Pi OS Image
+### 5. Install Required Dependencies
+Before building the custom OS image, install the necessary dependencies:
+```sh
+sudo apt-get update && sudo apt-get install -y quilt qemu-user-static debootstrap zerofree zip libarchive-tools bc pigz arch-test parted dosfstools rsync xz-utils xxd file
+```
+This process may take up to an hour, depending on your hardware.
+
+### 6. Build the Custom Raspberry Pi OS Image
 Inside the `pi-gen` directory, run the build process:
 ```sh
-./build.sh
+sudo ./build.sh
 ```
 This process may take up to an hour, depending on your hardware.
 
