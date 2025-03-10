@@ -1,0 +1,13 @@
+[Unit]
+Description=LED Beat Visualizer Service
+After=multi-user.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/beat-visualizer
+ExecStart=/home/pi/beat-visualizer/.venv/bin/python /home/pi/beat-visualizer/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
