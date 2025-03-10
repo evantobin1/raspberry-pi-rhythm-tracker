@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Beat Visualizer Configuration</title>
+</head>
+<body>
+    <h1>LED Beat Visualizer Settings</h1>
+    <form method="post">
+        <label>LED Count:</label>
+        <input type="number" name="led_count" value="{{ config['LED_COUNT'] }}" required>
+        <br>
+        <label>Delay (ms):</label>
+        <input type="number" name="delay_ms" value="{{ config['DELAY_MS'] }}" required>
+        <br>
+        <button type="submit">Update Settings</button>
+    </form>
+</body>
+</html>
