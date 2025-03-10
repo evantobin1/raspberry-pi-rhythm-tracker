@@ -1,18 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>rhythm Tracker Configuration</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raspberry Pi Rhythm Tracker</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>LED rhythm Tracker Settings</h1>
-    <form method="post">
-        <label>LED Count:</label>
-        <input type="number" name="led_count" value="{{ config['LED_COUNT'] }}" required>
-        <br>
-        <label>Delay (ms):</label>
-        <input type="number" name="delay_ms" value="{{ config['DELAY_MS'] }}" required>
-        <br>
-        <button type="submit">Update Settings</button>
+  <div class="container">
+    <h1>Rhythm Tracker Configuration</h1>
+  
+    <!-- LED & Delay Settings Form -->
+    <form method="POST">
+      <label for="led_count">LED Count:</label>
+      <input type="number" id="led_count" name="led_count" value="{{ config['LED_COUNT'] }}">
+      <br>
+
+      <label for="delay_ms">Delay (ms):</label>
+      <input type="number" id="delay_ms" name="delay_ms" value="{{ config['DELAY_MS'] }}">
+      <br>
+
+      <label for="audio_device">Select Audio Device:</label>
+      <select name="audio_device">
+        {% for device in audio_devices %}
+          <option value="{{ device['index'] }}" {% if device['index'] == config['AUDIO_DEVICE_INDEX'] %}selected{% endif %}>
+            {{ device['name'] }}
+          </option>
+        {% endfor %}
+      </select>
+      <br>
+
+      <!-- Color pickers for the two configurable colors -->
+      <label for="color0">Color 0:</label>
+      <input type="color" id="color0" name="color0" value="{{ config['COLOR_0'] }}">
+      <br>
+
+      <label for="color1">Color 1:</label>
+      <input type="color" id="color1" name="color1" value="{{ config['COLOR_1'] }}">
+      <br>
+
+      <button type="submit">Save & Apply</button>
     </form>
+
+    <h2>Beat Visualization</h2>
+    <div class="beat-visualization">
+      <!-- The inline style uses the configurable colors -->
+      <div id="redSquare" class="square" style="background-color: {{ config['COLOR_0'] }};"></div>
+      <div id="blueSquare" class="square" style="background-color: {{ config['COLOR_1'] }};"></div>
+    </div>
+
+    <!-- Display BPM and confidence -->
+    <div id="beatInfo"></div>
+
+    <script>
+      // Function to update squares based on beat info
+      function updateBeatDisplay(data) {
+        // data.flip_state: 0 means first color active, 1 means second color active
+        if (data.flip_state === 0) {
+          document.getElementById('redSquare').style.opacity = 1;
+          document.getElementById('blueSquare').style.opacity = 0.3;
+        } else if (data.flip_state === 1) {
+          document.getElementById('redSquare').style.opacity = 0.3;
+          document.getElementById('blueSquare').style.opacity = 1;
+        }
+        // Update beat info text
+        document.getElementById('beatInfo').innerHTML =
+          "BPM: " + data.bpm.toFixed(1) + " | Confidence: " + data.confidence.toFixed(2);
+      }
+
+      // Poll the /beat endpoint every 100ms
+      setInterval(function() {
+        fetch('/beat')
+          .then(response => response.json())
+          .then(data => {
+            updateBeatDisplay(data);
+          })
+          .catch(err => console.error("Error fetching beat data:", err));
+      }, 100);
+    </script>
+  </div>
 </body>
 </html>

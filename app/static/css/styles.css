@@ -1,0 +1,94 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+  }
+  
+  /* Container for the entire page */
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  /* Header styles */
+  h1, h2 {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  /* Form styles */
+  form {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Beat Visualization styles */
+  .beat-visualization {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+  
+  .square {
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    opacity: 0.3; /* Default dimmed */
+    transition: opacity 0.1s ease-in-out;
+    border-radius: 4px;
+  }
+  
+  #redSquare {
+    background-color: red;
+  }
+  
+  #blueSquare {
+    background-color: blue;
+  }
+  
+  /* Beat info text styling */
+  #beatInfo {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
